@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Invite</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        .invite-container {
+            width: 390px;
+            height: 844px;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+            border: 2px solid #00ff88;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+        }
+        
+        .glitch-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 136, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 40%, rgba(0, 255, 136, 0.03) 41%, rgba(0, 255, 136, 0.03) 42%, transparent 43%);
+            animation: pulse 3s ease-in-out infinite alternate;
+        }
+        
+        .terminal-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .access-denied {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: #ff0066;
+            font-size: 10px;
+            opacity: 0.7;
+            letter-spacing: 2px;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 10;
+            color: #00ff88;
+        }
+        
+        .status-line {
+            color: #00ff88;
+            font-size: 12px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        
+        .main-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        .subtitle {
+            color: #00ff88;
+            font-size: 16px;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+        
+        .location {
+            color: #ff6b6b;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .event-details {
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+        
+        .date-time {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+        
+        .prizes {
+            color: #ffaa00;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
+            animation: glow-gold 2s ease-in-out infinite alternate;
+        }
+        
+        .opportunity {
+            color: #00ff88;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            opacity: 0.9;
+            line-height: 1.4;
+            padding: 15px 20px;
+            margin: 10px 0;
+        }
+        
+        .cta-container {
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            padding: 3px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .cta-inner {
+            background: #0a0a0a;
+            padding: 20px 30px;
+            border-radius: 5px;
+            color: #00ff88;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .url {
+            color: #00ccff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: underline;
+            margin-top: 15px;
+        }
+        
+        .warning {
+            position: absolute;
+            bottom: 40px;
+            color: #ff0066;
+            font-size: 10px;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+        
+        .matrix-code {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .code-line {
+            position: absolute;
+            color: #00ff88;
+            font-size: 12px;
+            white-space: nowrap;
+            animation: matrix 10s linear infinite;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 136, 0.8); }
+            to { text-shadow: 0 0 30px rgba(0, 255, 136, 1), 0 0 40px rgba(0, 255, 136, 0.8); }
+        }
+        
+        @keyframes glow-gold {
+            from { text-shadow: 0 0 20px rgba(255, 170, 0, 0.8); }
+            to { text-shadow: 0 0 30px rgba(255, 170, 0, 1), 0 0 40px rgba(255, 170, 0, 0.8); }
+        }
+        
+        @keyframes pulse {
+            from { opacity: 0.3; }
+            to { opacity: 0.7; }
+        }
+        
+        @keyframes shimmer {
+            0% { background: linear-gradient(45deg, #00ff88, #00ccff); }
+            50% { background: linear-gradient(45deg, #00ccff, #ff00aa); }
+            100% { background: linear-gradient(45deg, #00ff88, #00ccff); }
+        }
+        
+        @keyframes matrix {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .code-line:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .code-line:nth-child(2) { left: 30%; animation-delay: -2s; }
+        .code-line:nth-child(3) { left: 60%; animation-delay: -4s; }
+        .code-line:nth-child(4) { left: 80%; animation-delay: -6s; }
+        .code-line:nth-child(5) { left: 90%; animation-delay: -8s; }
+    </style>
+</head>
+<body>
+    <div class="invite-container">
+        <div class="glitch-bg"></div>
+        <div class="terminal-border"></div>
+        
+        <div class="matrix-code">
+            <div class="code-line">010110010110</div>
+            <div class="code-line">110010110101</div>
+            <div class="code-line">101101010011</div>
+            <div class="code-line">011010110100</div>
+            <div class="code-line">100110101101</div>
+        </div>
+        
+        <div class="access-denied">ACCESS: RESTRICTED</div>
+        
+        <div class="content">
+            <div class="status-line">>> INCOMING TRANSMISSION</div>
+            
+            <div class="main-title">INVITE-ONLY</div>
+            <div class="subtitle">SHOPIFY HACKATHON</div>
+            
+            <div class="location">@ WEFUNDER</div>
+            
+            <div class="event-details">
+                <div class="date-time">AUG 9-10 • 9AM-5PM</div>
+                <div class="prizes">$40K IN PRIZES</div>
+                <div class="opportunity">and the chance to ship to millions of users on the Shop app</div>
+            </div>
+            
+            <div class="cta-container">
+                <div class="cta-inner">
+                    APPLY NOW
+                    <a href="https://shopifyhackathon.com" class="url" target="_blank">shopifyhackathon.com</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning">CLASSIFIED • FOR INVITED EYES ONLY</div>
+    </div>
+</body>
+</html> 
