@@ -221,7 +221,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.4;
+            opacity: 0.2;
             overflow: hidden;
             pointer-events: none;
             z-index: 1;
@@ -232,9 +232,14 @@
             color: #4a7c59;
             font-size: 12px;
             white-space: nowrap;
-            opacity: 0.8;
+            opacity: 0.3;
             animation: matrix 10s linear infinite;
             will-change: transform;
+        }
+        
+        /* Hide matrix animations in Safari */
+        .safari .matrix-code {
+            display: none;
         }
         
         @keyframes glow {
@@ -275,10 +280,6 @@
         .code-line:nth-child(6) { animation-delay: -1s; }
         .code-line:nth-child(7) { animation-delay: -5s; }
         .code-line:nth-child(8) { animation-delay: -7s; }
-        .code-line:nth-child(9) { animation-delay: -3s; }
-        .code-line:nth-child(10) { animation-delay: -9s; }
-        .code-line:nth-child(11) { animation-delay: -1.5s; }
-        .code-line:nth-child(12) { animation-delay: -4.5s; }
 
         /* Mobile Responsiveness */
         @media screen and (max-height: 750px) {
@@ -517,6 +518,12 @@
             }
         }
     </style>
+    <script>
+        // Detect Safari and hide matrix animations
+        if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+            document.documentElement.classList.add('safari');
+        }
+    </script>
 </head>
 <body>
     <div class="invite-container">
@@ -532,10 +539,6 @@
             <div class="code-line" style="left: 20%;">111000111000</div>
             <div class="code-line" style="left: 50%;">000111000111</div>
             <div class="code-line" style="left: 75%;">101010101010</div>
-            <div class="code-line" style="left: 15%;">001100110011</div>
-            <div class="code-line" style="left: 45%;">110011001100</div>
-            <div class="code-line" style="left: 25%;">010101010101</div>
-            <div class="code-line" style="left: 70%;">101010101010</div>
         </div>
         
         <div class="shopify-logo">
