@@ -221,9 +221,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.1;
+            opacity: 0.2;
             overflow: hidden;
             pointer-events: none;
+            z-index: 1;
         }
         
         .code-line {
@@ -232,6 +233,7 @@
             font-size: 12px;
             white-space: nowrap;
             animation: matrix 10s linear infinite;
+            will-change: transform;
         }
         
         @keyframes glow {
@@ -256,8 +258,30 @@
         }
         
         @keyframes matrix {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        
+        /* Fallback for Safari preview - static positioning */
+        @media (prefers-reduced-motion: reduce) {
+            .code-line {
+                animation: none;
+                position: static;
+                display: inline-block;
+                margin: 2px;
+                opacity: 0.3;
+            }
+            
+            .matrix-code {
+                position: relative;
+                opacity: 0.3;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                padding: 20px;
+            }
         }
         
         .code-line:nth-child(1) { left: 10%; animation-delay: 0s; }
@@ -265,6 +289,9 @@
         .code-line:nth-child(3) { left: 60%; animation-delay: -4s; }
         .code-line:nth-child(4) { left: 80%; animation-delay: -6s; }
         .code-line:nth-child(5) { left: 90%; animation-delay: -8s; }
+        .code-line:nth-child(6) { left: 20%; animation-delay: -1s; }
+        .code-line:nth-child(7) { left: 50%; animation-delay: -5s; }
+        .code-line:nth-child(8) { left: 75%; animation-delay: -7s; }
 
         /* Mobile Responsiveness */
         @media screen and (max-height: 750px) {
@@ -515,6 +542,9 @@
             <div class="code-line">101101010011</div>
             <div class="code-line">011010110100</div>
             <div class="code-line">100110101101</div>
+            <div class="code-line">111000111000</div>
+            <div class="code-line">000111000111</div>
+            <div class="code-line">101010101010</div>
         </div>
         
         <div class="shopify-logo">
