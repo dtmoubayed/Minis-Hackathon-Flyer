@@ -173,10 +173,6 @@
             font-size: 20px;
             font-weight: bold;
             letter-spacing: 1px;
-            display: block;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
         }
         
         .url {
@@ -186,22 +182,6 @@
             letter-spacing: 1px;
             text-decoration: underline;
             margin-top: 10px;
-            display: block;
-        }
-        
-        .cta-inner:hover {
-            transform: scale(1.02);
-        }
-        
-        .cta-inner:active {
-            background: white;
-            color: #0a0a0a;
-            transform: scale(0.98);
-        }
-        
-        .cta-inner:active .url {
-            color: #0a0a0a;
-            text-decoration: none;
         }
         
         .learn-more {
@@ -546,9 +526,9 @@
             </div>
             
             <div class="cta-container">
-                <a href="http://bit.ly/4lGfMxH" class="cta-inner" target="_blank">
-                    <span class="url">Apply now</span>
-                </a>
+                <div class="cta-inner">
+                    <a href="http://bit.ly/4lGfMxH" class="url" target="_blank">Apply now</a>
+                </div>
             </div>
             
             <div class="learn-more">
