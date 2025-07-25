@@ -221,7 +221,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0.2;
+            opacity: 0.4;
             overflow: hidden;
             pointer-events: none;
             z-index: 1;
@@ -232,8 +232,16 @@
             color: #00ff88;
             font-size: 12px;
             white-space: nowrap;
+            opacity: 0.6;
+            /* Default static positions - visible without animation */
+            top: 20%;
+        }
+        
+        /* Add animation as enhancement */
+        .code-line.animated {
             animation: matrix 10s linear infinite;
             will-change: transform;
+            top: auto;
         }
         
         @keyframes glow {
@@ -264,34 +272,16 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
         
-        /* Fallback for Safari preview - static positioning */
-        @media (prefers-reduced-motion: reduce) {
-            .code-line {
-                animation: none;
-                position: static;
-                display: inline-block;
-                margin: 2px;
-                opacity: 0.3;
-            }
-            
-            .matrix-code {
-                position: relative;
-                opacity: 0.3;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-                padding: 20px;
-            }
-        }
+
         
-        .code-line:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .code-line:nth-child(2) { left: 30%; animation-delay: -2s; }
-        .code-line:nth-child(3) { left: 60%; animation-delay: -4s; }
-        .code-line:nth-child(4) { left: 80%; animation-delay: -6s; }
-        .code-line:nth-child(5) { left: 90%; animation-delay: -8s; }
-        .code-line:nth-child(6) { left: 20%; animation-delay: -1s; }
-        .code-line:nth-child(7) { left: 50%; animation-delay: -5s; }
-        .code-line:nth-child(8) { left: 75%; animation-delay: -7s; }
+        .code-line.animated:nth-child(1) { animation-delay: 0s; }
+        .code-line.animated:nth-child(2) { animation-delay: -2s; }
+        .code-line.animated:nth-child(3) { animation-delay: -4s; }
+        .code-line.animated:nth-child(4) { animation-delay: -6s; }
+        .code-line.animated:nth-child(5) { animation-delay: -8s; }
+        .code-line.animated:nth-child(6) { animation-delay: -1s; }
+        .code-line.animated:nth-child(7) { animation-delay: -5s; }
+        .code-line.animated:nth-child(8) { animation-delay: -7s; }
 
         /* Mobile Responsiveness */
         @media screen and (max-height: 750px) {
@@ -537,14 +527,19 @@
         <div class="terminal-border"></div>
         
         <div class="matrix-code">
-            <div class="code-line">010110010110</div>
-            <div class="code-line">110010110101</div>
-            <div class="code-line">101101010011</div>
-            <div class="code-line">011010110100</div>
-            <div class="code-line">100110101101</div>
-            <div class="code-line">111000111000</div>
-            <div class="code-line">000111000111</div>
-            <div class="code-line">101010101010</div>
+            <div class="code-line animated" style="top: 10%; left: 10%;">010110010110</div>
+            <div class="code-line animated" style="top: 30%; left: 30%;">110010110101</div>
+            <div class="code-line animated" style="top: 50%; left: 60%;">101101010011</div>
+            <div class="code-line animated" style="top: 70%; left: 80%;">011010110100</div>
+            <div class="code-line animated" style="top: 15%; left: 90%;">100110101101</div>
+            <div class="code-line animated" style="top: 40%; left: 20%;">111000111000</div>
+            <div class="code-line animated" style="top: 25%; left: 50%;">000111000111</div>
+            <div class="code-line animated" style="top: 60%; left: 75%;">101010101010</div>
+            <!-- Static fallback positions for Safari preview -->
+            <div class="code-line" style="top: 5%; left: 15%;">001100110011</div>
+            <div class="code-line" style="top: 35%; left: 45%;">110011001100</div>
+            <div class="code-line" style="top: 65%; left: 25%;">010101010101</div>
+            <div class="code-line" style="top: 80%; left: 70%;">101010101010</div>
         </div>
         
         <div class="shopify-logo">
